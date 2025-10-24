@@ -1,8 +1,10 @@
+import 'model/bomb.dart';
+
 class PlayState {
   String? bot;
   int? coinId;
   int? round;
-  List<Map<String, int>>? bombs;
+  List<Bomb>? bombs;
   List<List<int>>? board;
 
   PlayState({
@@ -19,7 +21,7 @@ class PlayState {
       coinId: json['coin_id'],
       round: json['round'],
       bombs: (json['bombs'] as List<dynamic>?)
-          ?.map((e) => Map<String, int>.from(e))
+          ?.map((e) => Bomb.fromJson(e as Map<String, dynamic>))
           .toList(),
       board: (json['board'] as List<dynamic>?)
           ?.map((e) => (e as List<dynamic>).cast<int>())
