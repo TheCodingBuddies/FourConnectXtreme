@@ -49,11 +49,12 @@ class CustomWebsocketClient {
         String jsonResponse = jsonEncode(responseMap);
         _channel.sink.add(jsonResponse);
       }
-    } catch (e) {
+    } catch (e, s) {
       if (e is FormatException) {
         print("Got ping message");
       } else {
         print(e);
+        print(s);
       }
     }
   }
