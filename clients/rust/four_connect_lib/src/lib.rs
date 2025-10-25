@@ -1,4 +1,4 @@
-mod error;
+pub mod error;
 
 use async_trait::async_trait;
 use error::BotResult;
@@ -13,13 +13,13 @@ use tokio_tungstenite::{connect_async, tungstenite::Message, MaybeTlsStream, Web
 #[cfg(feature = "enable-tracing")]
 use tracing::{error, info, trace};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Bomb {
     pub row: i32,
     pub col: i32,
     pub explode_in_round: i32,
 }
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone, Eq, PartialEq, Hash)]
 pub struct PlayState {
     pub bot: String,
     pub coin_id: i32,
@@ -28,7 +28,7 @@ pub struct PlayState {
     pub board: Vec<Vec<i32>>,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Clone, Eq, PartialEq, Hash)]
 pub struct Trigger {
     pub state: String,
     pub column: i32,

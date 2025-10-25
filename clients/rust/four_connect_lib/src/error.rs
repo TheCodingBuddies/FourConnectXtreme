@@ -23,4 +23,4 @@ impl fmt::Display for BotError {
     }
 }
 
-pub(crate) type BotResult<T, E = BotError> = Result<T, E>;
+pub type BotResult<T, E = BotError> = Result<T, E>;
