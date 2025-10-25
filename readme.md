@@ -37,6 +37,7 @@ hervorzugehen! :)
     - Rust
     - Go
     - TypeScript
+    - C++
 
 ## Das Game starten
 
