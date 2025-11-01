@@ -50,6 +50,7 @@ Runtime-interne Threads (z. B. Garbage Collector, JIT, Timer, IO) sind davon aus
     - TypeScript
     - Dart
     - PHP
+    - C++
 
 ## Das Game starten
 
