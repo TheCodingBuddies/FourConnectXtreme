@@ -61,7 +61,9 @@ impl FourConnectBot {
                 if play_state.bot == bot_name {
                     let response = consumer.handle_message(play_state).await;
 
+                    #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
                     if let Err(error) = message_sender.send(response).await {
+                        #[cfg(feature = "enable-tracing")]
                         error!("{error}");
                     };
                 }
@@ -69,6 +71,7 @@ impl FourConnectBot {
         });
 
         let socket_handler = SocketHandler::new(consumer_sender, message_receiver);
+        #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
         if let Err(error) = start_socket(url, name, socket_handler).await {
             #[cfg(feature = "enable-tracing")]
             error!("Failed to start socket: {error}");
@@ -117,6 +120,7 @@ async fn read_from_socket(
             Message::Binary(message) => {
                 let play_state: PlayState = match serde_json::from_slice(&message) {
                     Ok(state) => state,
+                    #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
                     Err(error) => {
                         #[cfg(feature = "enable-tracing")]
                         error!("Failed to deserialize message: {error}");
@@ -127,11 +131,13 @@ async fn read_from_socket(
                 #[cfg(feature = "enable-tracing")]
                 trace!("Received binary message: {:?}", play_state);
 
+                #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
                 if let Err(error) = sender.send(play_state).await {
                     #[cfg(feature = "enable-tracing")]
                     error!("Failed to send message to channel: {error}");
                 }
             }
+            #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
             Message::Close(close_frame) => {
                 #[cfg(feature = "enable-tracing")]
                 info!("Received close frame: {close_frame:?}");
@@ -154,6 +160,7 @@ async fn write_to_socket(
 
         let message = match serde_json::to_vec(&trigger) {
             Ok(bytes) => bytes,
+            #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
             Err(error) => {
                 #[cfg(feature = "enable-tracing")]
                 error!("Failed to serialize trigger: {:?}", error);
@@ -161,6 +168,7 @@ async fn write_to_socket(
             }
         };
 
+        #[cfg_attr(not(feature = "enable-tracing"), allow(unused_variables))]
         if let Err(error) = write.send(Message::Binary(message.into())).await {
             #[cfg(feature = "enable-tracing")]
             error!("Failed to send message over WebSocket: {error}");
