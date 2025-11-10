@@ -104,10 +104,11 @@ func _get_all_bomb_data():
 	var bomb_data = []
 	for child in get_children():
 		if child is Bomb:
-			bomb_data.append({
-				"row": child.final_destination_row, 
-				"col": child.final_destination_col, 
-				"explode_in_round": child.boom_in_round})
+			if child.boom_in_round > current_turn:
+				bomb_data.append({
+					"row": child.final_destination_row, 
+					"col": child.final_destination_col, 
+					"explode_in_round": child.boom_in_round})
 	return bomb_data
 	
 func finish():
