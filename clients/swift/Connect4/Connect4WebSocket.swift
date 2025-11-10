@@ -15,15 +15,12 @@ import FoundationNetworking
     private let url: URL
     private let bot: BotProtocol
 
-    private let onReceive: ([[Int]]) -> Int
-
     // Continuation that will be resumed when the socket closes
     private var closeContinuation: CheckedContinuation<Void, Never>?
 
-    init(url: URL, bot: BotProtocol, onReceive: @escaping ([[Int]]) -> Int) {
+    init(url: URL, bot: BotProtocol) {
         self.url = url
         self.bot = bot
-        self.onReceive = onReceive
     }
 
     func connect() {
@@ -63,7 +60,7 @@ import FoundationNetworking
                             let response: WebSocketResponse = try data.decoded()
                             print("Received Data for Bot: \(response.bot)")
                             if response.bot == self.bot.name {
-                                let col: Int = self.onReceive(response.board)
+                                let col = self.bot.play(board: response.board)
                                 let messageData = "{\"state\": \"play\", \"column\": \(col)}".data(using: .utf8)!
                                 self.send(message: messageData)
                             }
