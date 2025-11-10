@@ -21,13 +21,13 @@ import Foundation
     }
 }
 
-final class RandomAIBot: BotProtocol {
+@MainActor final class RandomAIBot: BotProtocol {
     let name: String
     public init(name: String) {
         self.name = name
     }
 
-    func play(board: [[Int]], bomb: Bomb?) -> Int {
+    @MainActor func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int {
         return Int.random(in: 0...6)
     }
 }
@@ -38,7 +38,7 @@ final class RandomAIBot: BotProtocol {
         self.name = name
     }
 
-    @MainActor func play(board: [[Int]], bomb: Bomb?) -> Int {
+    @MainActor func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int {
         // Implement your code here and return the column as Int
         return 0
     }
@@ -46,5 +46,5 @@ final class RandomAIBot: BotProtocol {
 
 @MainActor protocol BotProtocol {
     var name: String { get }
-    func play(board: [[Int]], bomb: Bomb?) -> Int
+    func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int
 }
