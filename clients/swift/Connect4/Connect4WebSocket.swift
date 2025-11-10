@@ -60,7 +60,7 @@ import FoundationNetworking
                             let response: WebSocketResponse = try data.decoded()
                             print("Received Data for Bot: \(response.bot)")
                             if response.bot == self.bot.name {
-                                let col = self.bot.play(board: response.board)
+                                let col = self.bot.play(board: response.board, bomb: response.bombs.first)
                                 let messageData = "{\"state\": \"play\", \"column\": \(col)}".data(using: .utf8)!
                                 self.send(message: messageData)
                             }
