@@ -10,4 +10,4 @@ services:
       - "host.docker.internal:host-gateway"
     # If you mount source and want live recompilation, you could override command here
     # else you can rely on the CMD in the image
-    command: bash -c "swiftc *.swift -o /connect4 -Xlinker --no-warn-rwx-segments && /connect4"
+    command: bash -c "swiftc *.swift -o /connect4 -Xlinker --no-warn-rwx-segments && /connect4 --bot yourSuperCoolBot --port 5051"

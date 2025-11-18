@@ -7,8 +7,8 @@
 
 import Foundation
 
-@MainActor final class BotFactory {
-    static let shared = BotFactory()
+final class BotFactory {
+    @MainActor static let shared = BotFactory()
 
     private init() { return }
 
@@ -17,34 +17,34 @@ import Foundation
     }
 
     func yourSuperCoolBot() -> BotProtocol {
-        return YourSuperCoolBot(name: "YourSuperCoolBot")
+        return YourSuperCoolBot(name: "yourSuperCoolBot")
     }
 }
 
-@MainActor final class RandomAIBot: BotProtocol {
+final class RandomAIBot: BotProtocol {
     let name: String
     public init(name: String) {
         self.name = name
     }
 
-    @MainActor func play(board: [[Int]], round: Int, coinId: Int, bomb: Bomb?) -> Int {
+    func play(game: [[Int]]) -> Int {
         return Int.random(in: 0...6)
     }
 }
 
-@MainActor final class YourSuperCoolBot: BotProtocol {
+final class YourSuperCoolBot: BotProtocol {
     let name: String
     public init(name: String) {
         self.name = name
     }
-
-    @MainActor func play(board: [[Int]], round: Int, coinId: Int, bomb: Bomb?) -> Int {
+    
+    func play(game: [[Int]]) -> Int {
         // Implement your code here and return the column as Int
         return 0
     }
 }
 
-@MainActor protocol BotProtocol {
+protocol BotProtocol {
     var name: String { get }
-    func play(board: [[Int]], round: Int, coinId: Int, bomb: Bomb?) -> Int
+    func play(game: [[Int]]) -> Int
 }
