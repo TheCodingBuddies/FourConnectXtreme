@@ -31,9 +31,7 @@ guard let url = URL(string: urlString) else {
     fatalError("❌ Invalid WebSocket URL: \(urlString)")
 }
 
-let manager = WebSocketManager(url: url, bot: bot) { board in
-    return bot.play(game: board)
-}
+let manager = WebSocketManager(url: url, bot: bot)
 manager.connect()
 print("🚀 WebSocket connected – waiting for the game to finish…")
 
