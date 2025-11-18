@@ -25,7 +25,7 @@ switch botName {
         fatalError("No bot with that Name")
 }
 
-let urlString = "ws://host.docker.internal:\(port)/\(botName)"
+let urlString = "ws://host.docker.internal:\(port)/\(bot.name)"
 
 guard let url = URL(string: urlString) else {
     fatalError("❌ Invalid WebSocket URL: \(urlString)")

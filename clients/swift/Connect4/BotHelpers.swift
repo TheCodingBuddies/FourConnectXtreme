@@ -13,11 +13,11 @@ final class BotFactory {
     private init() { return }
 
     func randomAI() -> BotProtocol {
-        return RandomAIBot(name: "randomAI")
+        return RandomAIBot(name: "RandomAI")
     }
 
     func yourSuperCoolBot() -> BotProtocol {
-        return YourSuperCoolBot(name: "yourSuperCoolBot")
+        return YourSuperCoolBot(name: "YourSuperCoolBot")
     }
 }
 
@@ -27,7 +27,7 @@ final class RandomAIBot: BotProtocol {
         self.name = name
     }
 
-    func play(game: [[Int]], round: Int, bomb: Bomb?) -> Int {
+    func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int {
         return Int.random(in: 0...6)
     }
 }
@@ -38,7 +38,7 @@ final class YourSuperCoolBot: BotProtocol {
         self.name = name
     }
     
-    func play(game: [[Int]], round: Int, bomb: Bomb?) -> Int {
+    func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int {
         // Implement your code here and return the column as Int
         return 0
     }
@@ -46,5 +46,5 @@ final class YourSuperCoolBot: BotProtocol {
 
 protocol BotProtocol {
     var name: String { get }
-    func play(game: [[Int]], round: Int, bomb: Bomb?) -> Int
+    func play(board: [[Int]], round: Int, bomb: Bomb?) -> Int
 }
