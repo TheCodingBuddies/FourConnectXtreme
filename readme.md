@@ -51,6 +51,7 @@ Runtime-interne Threads (z. B. Garbage Collector, JIT, Timer, IO) sind davon aus
     - Dart
     - PHP
     - C++
+    - Swift
 
 ## Das Game starten
 

@@ -69,8 +69,9 @@ func _on_sprite_2d_animation_finished() -> void:
 	
 func fade_out_drop(player: AudioStreamPlayer, duration: float = 1.0):
 	var tween := get_tree().create_tween()
-	tween.tween_property(player, "volume_db", -40, duration) # -80db = praktisch lautlos
+	tween.tween_property(player, "volume_db", -40, duration)
 	tween.finished.connect(func():
-		player.stop()
-		player.volume_db = -4
+		if is_instance_valid(player):
+			player.stop()
+			player.volume_db = -4
 	)
