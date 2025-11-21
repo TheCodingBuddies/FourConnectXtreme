@@ -188,6 +188,7 @@ func _detonate(row: int, col: int):
 	if winners.size() > 0:
 		_highlight(board.get_winning_coins())
 		_game_is_over(winners)
+		return
 		
 	GameManager.setState(GameManager.GameState.NEXT)
 	if WebsocketServer.player_one_active and WebsocketServer.is_player_one_bot() or not WebsocketServer.player_one_active and WebsocketServer.is_player_two_bot():
