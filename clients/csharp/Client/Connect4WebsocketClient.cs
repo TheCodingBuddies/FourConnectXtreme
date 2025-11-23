@@ -25,7 +25,7 @@ namespace CsClient.CsharpClient
         /// <returns>Das Taskobjekt welches die asynchrone Ausfuehrung repraesentiert</returns>
         public async Task Connect(string uri)
         {
-            await Connect(new Uri(Path.Combine(uri, _bot.Name)));
+            await Connect(new Uri($"{uri}/{_bot.Name}"));
         }
 
         /// <summary>
